@@ -1,0 +1,81 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User account information and preferences",
+      "type": "object",
+      "properties": {
+        "email": { "type": "string", "format": "email" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "preferences": { "type": "string", "description": "Comma separated list of dietary preferences" },
+        "favorites": { "type": "array", "description": "List of restaurant IDs" },
+        "address": { "type": "string" }
+      },
+      "required": ["email"]
+    },
+    "Restaurant": {
+      "title": "Restaurant",
+      "description": "Restaurant details and metadata",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "cuisine": { "type": "string" },
+        "rating": { "type": "number" },
+        "deliveryTime": { "type": "string" },
+        "image": { "type": "string" },
+        "categories": { "type": "array" },
+        "isOpen": { "type": "boolean" }
+      },
+      "required": ["name", "cuisine"]
+    },
+    "MenuItem": {
+      "title": "Menu Item",
+      "description": "A single dish in a restaurant's menu",
+      "type": "object",
+      "properties": {
+        "restaurantId": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "category": { "type": "string" },
+        "emoji": { "type": "string" },
+        "calories": { "type": "number" }
+      },
+      "required": ["restaurantId", "name", "price"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "A food delivery order",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "restaurantId": { "type": "string" },
+        "items": { "type": "array" },
+        "total": { "type": "number" },
+        "status": { "type": "string", "enum": ["pending", "preparing", "out_for_delivery", "delivered", "cancelled"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "deliveryAddress": { "type": "string" }
+      },
+      "required": ["userId", "restaurantId", "items", "total", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "restaurants/{restaurantId}": {
+      "schema": "Restaurant",
+      "description": "Restaurant catalog"
+    },
+    "restaurants/{restaurantId}/menu": {
+      "schema": "MenuItem",
+      "description": "Menu for each restaurant"
+    },
+    "orders/{orderId}": {
+      "schema": "Order",
+      "description": "Customer orders"
+    }
+  }
+}

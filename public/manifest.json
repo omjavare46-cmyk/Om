@@ -1,0 +1,16 @@
+{
+  "name": "Elite Eats",
+  "short_name": "EliteEats",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FF5F1F",
+  "theme_color": "#FF5F1F",
+  "icons": [
+    {
+      "src": "https://cdn-icons-png.flaticon.com/512/1037/1037762.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
